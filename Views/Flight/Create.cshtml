@@ -1,0 +1,29 @@
+@model Flight
+
+<h2>Uçuş Ekle</h2>
+<hr>
+<form asp-controller="Flight" asp-action="Create" method="post">
+    <div class="mb-3">
+        <label asp-for="FlightNumber" class="form-label"></label>
+        <input asp-for="FlightNumber" class="form-control">
+    </div>
+    <div class="mb-3">
+        <label asp-for="Origin" class="form-label"></label>
+        <input asp-for="Origin" class="form-control">
+    </div>
+    <div class="mb-3">
+        <label asp-for="Destination" class="form-label"></label>
+        <input asp-for="Destination" class="form-control">
+    </div>
+    <div class="mb-3">
+        <label asp-for="Capacity" class="form-label"></label>
+        <input asp-for="Capacity" class="form-control">
+    </div>
+
+     <div class="mb-3">
+        <label asp-for="Price" class="form-label"></label>
+        <input asp-for="Price" class="form-control">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Kaydet</button>
+</form>

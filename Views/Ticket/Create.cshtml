@@ -1,0 +1,45 @@
+@model Ticket
+
+<h2>Yeni Bilet Ekle</h2>
+
+<form asp-controller="Ticket" asp-action="Create" method="post">
+    <div class="mb-3">
+        <label asp-for="CustomerId" class="form-label">Müşteri:</label>
+        <select asp-for="CustomerId" asp-items="ViewBag.Customers" class="form-select">
+            <option value="">Seçiniz</option>
+        </select>
+        <span asp-validation-for="CustomerId" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="FlightId" class="form-label">Uçuş:</label>
+        <select asp-for="FlightId" asp-items="ViewBag.Flights" class="form-select">
+            <option value="">Seçiniz</option>
+        </select>
+        <span asp-validation-for="FlightId" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="SeatNumber" class="form-label">Koltuk Numarası:</label>
+        <input asp-for="SeatNumber" class="form-control" />
+        <span asp-validation-for="SeatNumber" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="TotalPrice" class="form-label">Toplam Fiyat:</label>
+        <input asp-for="TotalPrice" class="form-control" />
+        <span asp-validation-for="TotalPrice" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="BookingDate" class="form-label">Rezervasyon Tarihi:</label>
+        <input asp-for="BookingDate" class="form-control" type="date" />
+        <span asp-validation-for="BookingDate" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Kaydet</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

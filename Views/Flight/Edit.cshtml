@@ -1,0 +1,32 @@
+@model Flight
+
+<h2>Müşteri Güncelle</h2>
+<hr>
+<form asp-controller="Flight" asp-action="Edit" method="post">
+    <input type="hidden" asp-for="Id">
+    <div class="mb-3">
+        <label asp-for="Id" class="form-label">@Model.Id</label>
+    </div>
+    <div class="mb-3">
+        <label asp-for="FlightNumber" class="form-label">Uçuş Numarası</label>
+        <input asp-for="FlightNumber" class="form-control">
+    </div>
+    <div class="mb-3">
+        <label asp-for="Origin" class="form-label">Kalkış Yeri</label>
+        <input asp-for="Origin" class="form-control">
+    </div>
+    <div class="mb-3">
+        <label asp-for="Destination" class="form-label">Varış Yeri</label>
+        <input asp-for="Destination" class="form-control">
+    </div>
+    <div class="mb-3">
+        <label asp-for="Capacity" class="form-label">Yolcu Kapasitesi</label>
+        <input asp-for="Capacity" class="form-control">
+    </div>
+    <div class="mb-3">
+        <label asp-for="Price" class="form-label">Bilet Fiyatı</label>
+        <input asp-for="Price" class="form-control">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Kaydet</button>
+</form>
