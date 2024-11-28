@@ -1,0 +1,26 @@
+@model IEnumerable<SearchResult>
+
+<form asp-controller="Home" asp-action="Search" method="get" class="d-flex">
+    <input type="text" name="query" class="form-control me-2" placeholder="Ara..." />
+    <button type="submit" class="btn btn-outline-success">Ara</button>
+</form>
+
+<h2>Arama Sonuçları</h2>
+
+@if (Model != null && Model.Any())
+{
+    <ul class="list-group">
+    @foreach (var result in Model)
+        {
+            <li class="list-group-item">
+                <strong>@result.Type:</strong>
+                <a href="@result.Link">@result.Title</a>
+                <p>@result.Description</p>
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <p class="text-muted">Sonuç bulunamadı.</p>
+}
