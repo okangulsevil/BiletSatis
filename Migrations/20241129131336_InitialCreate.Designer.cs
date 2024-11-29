@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BiletSatis.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20241127215751_UpdateRelationships")]
-    partial class UpdateRelationships
+    [Migration("20241129131336_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -30,12 +30,15 @@ namespace BiletSatis.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("FirstName")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("LastName")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Phone")
@@ -62,16 +65,19 @@ namespace BiletSatis.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Destination")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("FlightNumber")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Origin")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<decimal>("Price")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
 
@@ -87,13 +93,19 @@ namespace BiletSatis.Migrations
                     b.Property<DateTime>("BookingDate")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("CustomerId")
+                    b.Property<int?>("CustomerId")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("FlightId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<bool>("IsBooked")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER")
+                        .HasDefaultValue(false);
+
                     b.Property<string>("SeatNumber")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<decimal>("TotalPrice")
@@ -111,13 +123,12 @@ namespace BiletSatis.Migrations
             modelBuilder.Entity("BiletSatis.Models.Ticket", b =>
                 {
                     b.HasOne("BiletSatis.Models.Customer", "Customer")
-                        .WithMany()
+                        .WithMany("Tickets")
                         .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("BiletSatis.Models.Flight", "Flight")
-                        .WithMany()
+                        .WithMany("Tickets")
                         .HasForeignKey("FlightId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -125,6 +136,16 @@ namespace BiletSatis.Migrations
                     b.Navigation("Customer");
 
                     b.Navigation("Flight");
+                });
+
+            modelBuilder.Entity("BiletSatis.Models.Customer", b =>
+                {
+                    b.Navigation("Tickets");
+                });
+
+            modelBuilder.Entity("BiletSatis.Models.Flight", b =>
+                {
+                    b.Navigation("Tickets");
                 });
 #pragma warning restore 612, 618
         }

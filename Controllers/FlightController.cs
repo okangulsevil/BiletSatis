@@ -18,15 +18,30 @@ namespace BiletSatis.Controllers
             return View();
         }
 
-
         [HttpPost]
-        public async Task<IActionResult> Create(Flight model)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(Flight flight)
         {
-            _context.Flights.Add(model);
-            await _context.SaveChangesAsync();
-            return RedirectToAction("Index");
-        }
+            if (ModelState.IsValid)
+            {
+                _context.Flights.Add(flight);
+                await _context.SaveChangesAsync();
 
+                // Kapasite kadar bilet oluştur
+                for (int i = 1; i <= flight.Capacity; i++)
+                {
+                    _context.Tickets.Add(new Ticket
+                    {
+                        FlightId = flight.Id,
+                        SeatNumber = $"Seat-{i}" // Koltuk numarası
+                    });
+                }
+                await _context.SaveChangesAsync();
+
+                return RedirectToAction(nameof(Index));
+            }
+            return View(flight);
+        }
 
         [HttpGet]
         public async Task<IActionResult> Edit(int? id)
@@ -36,35 +51,35 @@ namespace BiletSatis.Controllers
                 return NotFound();
             }
 
-            var flight = await _context.Flights.FindAsync(id);
+            var Flight = await _context.Flights.FindAsync(id);
 
-
-            if (flight == null)
+            if (Flight == null)
             {
                 return NotFound();
             }
-            return View(flight);
+            return View(Flight);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, Flight model)
+        public async Task<IActionResult> Edit(int id, Flight flight)
         {
 
-            if (id != model.Id)
+            if (id != flight.Id)
             {
                 return NotFound();
             }
+
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _context.Update(model);
+                    _context.Update(flight);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!_context.Flights.Any(o => o.Id == model.Id))
+                    if (!_context.Flights.Any(o => o.Id == flight.Id))
                     {
                         return NotFound();
                     }
@@ -76,7 +91,7 @@ namespace BiletSatis.Controllers
                 return RedirectToAction("Index");
             }
 
-            return View(model);
+            return View(flight);
         }
 
         [HttpGet]
@@ -86,23 +101,23 @@ namespace BiletSatis.Controllers
             {
                 return NotFound();
             }
-            var flight = await _context.Flights.FindAsync(id);
-            if (flight == null)
+            var Flight = await _context.Flights.FindAsync(id);
+            if (Flight == null)
             {
                 return NotFound();
             }
-            return View(flight);
+            return View(Flight);
         }
 
         [HttpPost]
         public async Task<IActionResult> Delete([FromForm] int id)
         {
-            var flight = await _context.Flights.FindAsync(id);
-            if (flight == null)
+            var Flight = await _context.Flights.FindAsync(id);
+            if (Flight == null)
             {
                 return NotFound();
             }
-            _context.Flights.Remove(flight);
+            _context.Flights.Remove(Flight);
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");
         }

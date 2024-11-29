@@ -1,0 +1,39 @@
+<div class="container my-5">
+    <h2 class="text-center mb-4">Bilet Arama</h2>
+    <form asp-controller="Home" asp-action="Search" method="get" class="p-4 bg-light shadow rounded">
+        <div class="row g-3 align-items-center">
+
+            <!-- Flight Number -->
+            <div class="col-md-3">
+                <label for="flightNumber" class="form-label">Uçuş Numarası</label>
+                <input type="text" class="form-control" id="flightNumber" name="flightNumber"
+                    placeholder="Uçuş Numarası">
+            </div>
+
+            <!-- Origin -->
+            <div class="col-md-3">
+                <label for="origin" class="form-label">Kalkış Yeri</label>
+                <input type="text" class="form-control" id="origin" name="origin" placeholder="Kalkış Şehri">
+            </div>
+
+            <!-- Destination -->
+            <div class="col-md-3">
+                <label for="destination" class="form-label">Varış Yeri</label>
+                <input type="text" class="form-control" id="destination" name="destination" placeholder="Varış Şehri">
+            </div>
+
+            <!-- Booking Date -->
+            <div class="col-md-3">
+                <label for="bookingDate" class="form-label">Tarih</label>
+                <input type="date" class="form-control" id="bookingDate" name="bookingDate">
+            </div>
+            
+            <!-- Submit Button -->
+            <div class="text-center mt-4">
+                <button type="submit" class="btn btn-primary btn-lg">Ara</button>
+            </div>
+        </div>
+
+
+    </form>
+</div>

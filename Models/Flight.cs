@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BiletSatis.Models
 {
@@ -6,19 +7,31 @@ namespace BiletSatis.Models
     {
         [Key]
         public int Id { get; set; }
-        public string? FlightNumber { get; set; } // Uçuş Numarası
-        public string? Origin { get; set; }      // Kalkış Yeri
-        public string? Destination { get; set; } // Varış Yeri
 
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
-        public DateTime DepartureTime { get; set; } // Kalkış Zamanı
+        [Required]
+        public string FlightNumber { get; set; } = string.Empty;
 
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
-        public DateTime ArrivalTime { get; set; }   // Varış Zamanı
-        public int Capacity { get; set; }       // Koltuk Kapasitesi
-        public decimal Price { get; set; }      // Bilet Ücreti
-        public ICollection<Ticket> Tickets { get; set; } // Navigation property
+        [Required]
+        public string Origin { get; set; } = string.Empty;
+
+        [Required]
+        public string Destination { get; set; } = string.Empty;
+
+        [Required]
+        [DataType(DataType.DateTime)]
+        public DateTime DepartureTime { get; set; }
+
+        [Required]
+        [DataType(DataType.DateTime)]
+        public DateTime ArrivalTime { get; set; }
+
+        [Required]
+        public int Capacity { get; set; }
+
+        [Required]
+        [Column(TypeName = "decimal(18,2)")]
+        public decimal Price { get; set; }
+
+        public ICollection<Ticket> Tickets { get; set; } = new List<Ticket>();
     }
 }

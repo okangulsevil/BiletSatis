@@ -24,5 +24,15 @@
         <input asp-for="Phone" class="form-control">
     </div>
 
-    <button type="submit" class="btn btn-primary">Kaydet</button>
+    <div class="mb-3">
+        <label asp-for="DateOfBirth" class="form-label">Doğum Tarihi</label>
+        <input asp-for="DateOfBirth" class="form-control" type="date"
+            value="@Model.DateOfBirth.ToString("yyyy-MM-dd")" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Güncelle</button>
 </form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

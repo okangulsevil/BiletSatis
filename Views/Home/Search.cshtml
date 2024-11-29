@@ -1,26 +1,38 @@
 @model IEnumerable<SearchResult>
 
-<form asp-controller="Home" asp-action="Search" method="get" class="d-flex">
-    <input type="text" name="query" class="form-control me-2" placeholder="Ara..." />
-    <button type="submit" class="btn btn-outline-success">Ara</button>
-</form>
+<div class="container my-5">
+    <h2 class="text-center">Arama Sonuçları</h2>
 
-<h2>Arama Sonuçları</h2>
-
-@if (Model != null && Model.Any())
-{
-    <ul class="list-group">
-    @foreach (var result in Model)
-        {
-            <li class="list-group-item">
-                <strong>@result.Type:</strong>
-                <a href="@result.Link">@result.Title</a>
-                <p>@result.Description</p>
-            </li>
-        }
-    </ul>
-}
-else
-{
-    <p class="text-muted">Sonuç bulunamadı.</p>
-}
+    @if (Model.Any())
+    {
+        <table class="table table-striped mt-4">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Uçuş Numarası</th>
+                    <th>Açıklama</th>
+                    <th>Boş Koltuk</th>
+                    <th>İşlem</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var result in Model)
+                {
+                    <tr>
+                        <td>@result.Id</td>
+                        <td>@result.Title</td>
+                        <td>@result.Description</td>
+                        <td>@result.ExtraInfo</td>
+                        <td>
+                            <a href="@result.Link" class="btn btn-primary btn-sm">Rezervasyon Yap</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <div class="alert alert-warning text-center">Arama kriterlerinize uygun uçuş bulunamadı.</div>
+    }
+</div>

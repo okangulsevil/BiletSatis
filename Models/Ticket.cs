@@ -8,25 +8,27 @@ namespace BiletSatis.Models
         [Key]
         public int Id { get; set; }
 
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
-        public DateTime BookingDate { get; set; } // Rezervasyon Tarihi
-
         [Required]
-        [ForeignKey("Customer")]
-        public int CustomerId { get; set; }
-        public Customer Customer { get; set; } // Navigation property
-
-        [Required]
-        [ForeignKey("Flight")]
         public int FlightId { get; set; }
-        public Flight Flight { get; set; } // Navigation property
 
         [Required]
-        public string SeatNumber { get; set; } // Koltuk Numarası
+        public Flight Flight { get; set; } = null!; // Null atanamaz olarak işaretlendi
+
+        public int? CustomerId { get; set; }
+
+        public Customer? Customer { get; set; }
 
         [Required]
-        [Range(1, 10000)]
-        public decimal TotalPrice { get; set; } // Toplam Fiyat
+        public string SeatNumber { get; set; } = string.Empty; // Varsayılan değer eklendi
+
+        [Required]
+        [Range(0.01, double.MaxValue)]
+        public decimal TotalPrice { get; set; }
+
+        [Required]
+        [DataType(DataType.Date)]
+        public DateTime BookingDate { get; set; }
+
+        public bool IsBooked { get; set; } = false; // Varsayılan değer eklendi
     }
 }

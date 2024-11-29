@@ -9,17 +9,26 @@ namespace BiletSatis.Models
         public DbSet<Ticket> Tickets => Set<Ticket>();
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Ticket - Customer ilişkisi
-            modelBuilder.Entity<Ticket>()
-                .HasOne(t => t.Customer)
-                .WithMany(c => c.Tickets)
-                .HasForeignKey(t => t.CustomerId);
+            base.OnModelCreating(modelBuilder);
 
-            // Ticket - Flight ilişkisi
+            // Flight - Ticket ilişkilendirmesi
             modelBuilder.Entity<Ticket>()
                 .HasOne(t => t.Flight)
                 .WithMany(f => f.Tickets)
-                .HasForeignKey(t => t.FlightId);
+                .HasForeignKey(t => t.FlightId)
+                .OnDelete(DeleteBehavior.Cascade); // Uçuş silindiğinde ilgili biletler de silinir
+
+            // Ticket - Customer ilişkilendirmesi
+            modelBuilder.Entity<Ticket>()
+                .HasOne(t => t.Customer)
+                .WithMany(c => c.Tickets)
+                .HasForeignKey(t => t.CustomerId)
+                .OnDelete(DeleteBehavior.SetNull); // Müşteri silindiğinde biletler boşa çıkar
+
+            // Varsayılan değerler ve diğer ayarlar
+            modelBuilder.Entity<Ticket>()
+                .Property(t => t.IsBooked)
+                .HasDefaultValue(false); // Varsayılan olarak biletler rezerve edilmemiş olur
         }
     }
 }

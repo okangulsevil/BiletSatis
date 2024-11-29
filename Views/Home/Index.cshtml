@@ -3,7 +3,11 @@
 }
 @model IEnumerable<SearchResult>
 
+
+
 <div class="text-center">
     <h1 class="display-4">Uçak Bileti Satın Al</h1>
     <p>Arama yapmak için <a class="" asp-controller="Home" asp-action="Search">tıklayın</a>.</p>
 </div>
+
+@await Html.PartialAsync("BiletAra")

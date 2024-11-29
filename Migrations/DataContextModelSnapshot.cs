@@ -27,12 +27,15 @@ namespace BiletSatis.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("FirstName")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("LastName")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Phone")
@@ -59,16 +62,19 @@ namespace BiletSatis.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Destination")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("FlightNumber")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Origin")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<decimal>("Price")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
 
@@ -84,11 +90,16 @@ namespace BiletSatis.Migrations
                     b.Property<DateTime>("BookingDate")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("CustomerId")
+                    b.Property<int?>("CustomerId")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("FlightId")
                         .HasColumnType("INTEGER");
+
+                    b.Property<bool>("IsBooked")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER")
+                        .HasDefaultValue(false);
 
                     b.Property<string>("SeatNumber")
                         .IsRequired()
@@ -111,8 +122,7 @@ namespace BiletSatis.Migrations
                     b.HasOne("BiletSatis.Models.Customer", "Customer")
                         .WithMany("Tickets")
                         .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("BiletSatis.Models.Flight", "Flight")
                         .WithMany("Tickets")

@@ -18,16 +18,31 @@ namespace BiletSatis.Controllers
             return View();
         }
 
-
         [HttpPost]
-        public async Task<IActionResult> Create(Customer model)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(Customer customer)
         {
-            _context.Customers.Add(model);
+            customer.DateOfBirth = customer.DateOfBirth.Date;
+            _context.Customers.Add(customer);
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Detail(int id)
+        {
+            var customer = await _context.Customers
+                .Include(c => c.Tickets)
+                .ThenInclude(t => t.Flight)
+                .FirstOrDefaultAsync(c => c.Id == id);
 
+            if (customer == null)
+            {
+                return NotFound();
+            }
+
+            return View(customer);
+        }
         [HttpGet]
         public async Task<IActionResult> Edit(int? id)
         {
@@ -48,10 +63,10 @@ namespace BiletSatis.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, Customer model)
+        public async Task<IActionResult> Edit(int id, Customer customer)
         {
 
-            if (id != model.Id)
+            if (id != customer.Id)
             {
                 return NotFound();
             }
@@ -59,12 +74,20 @@ namespace BiletSatis.Controllers
             {
                 try
                 {
-                    _context.Update(model);
+                    _context.Update(new Customer()
+                    {
+                        Id = customer.Id,
+                        FirstName = customer.FirstName,
+                        LastName = customer.LastName,
+                        Email = customer.Email,
+                        Phone = customer.Phone,
+                        DateOfBirth = customer.DateOfBirth
+                    });
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!_context.Customers.Any(o => o.Id == model.Id))
+                    if (!_context.Customers.Any(o => o.Id == customer.Id))
                     {
                         return NotFound();
                     }
@@ -76,7 +99,7 @@ namespace BiletSatis.Controllers
                 return RedirectToAction("Index");
             }
 
-            return View(model);
+            return View(customer);
         }
 
         [HttpGet]
@@ -108,4 +131,3 @@ namespace BiletSatis.Controllers
         }
     }
 }
-

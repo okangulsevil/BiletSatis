@@ -1,0 +1,68 @@
+@model Customer
+
+<div class="container my-5">
+    <h2>@Model.FullName - Detaylar</h2>
+    <hr />
+
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <div class="row  mb-3">
+                <div class="d-flex align-items-center justify-start gap-3">
+                    <h5 class="mb-0">Kişisel Bilgiler</h5>
+                    <a asp-controller="Customer" asp-action="Edit" asp-route-id="@Model.Id"
+                        class="btn btn-sm btn-warning">Düzenle</a>
+                </div>
+            </div>
+            <ul class="list-group">
+                <li class="list-group-item"><strong>Ad:</strong> @Model.FirstName</li>
+                <li class="list-group-item"><strong>Soyad:</strong> @Model.LastName</li>
+                <li class="list-group-item"><strong>E-posta:</strong> @Model.Email</li>
+                <li class="list-group-item"><strong>Telefon:</strong> @Model.Phone</li>
+                <li class="list-group-item"><strong>Doğum Tarihi:</strong> @Model.DateOfBirth.ToString("yyyy-MM-dd")
+                </li>
+            </ul>
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <h5>Rezervasyon Yaptığı Biletler</h5>
+
+            @if (Model.Tickets.Any())
+            {
+                <table class="table table-striped mt-3">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Uçuş Numarası</th>
+                            <th>Kalkış</th>
+                            <th>Varış</th>
+                            <th>Koltuk Numarası</th>
+                            <th>Rezervasyon Tarihi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var ticket in Model.Tickets)
+                        {
+                            <tr>
+                                <td>@ticket.Id</td>
+                                <td>@ticket.Flight.FlightNumber</td>
+                                <td>@ticket.Flight.Origin</td>
+                                <td>@ticket.Flight.Destination</td>
+                                <td>@ticket.SeatNumber</td>
+                                <td>@ticket.BookingDate.ToString("yyyy-MM-dd")</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <div class="alert alert-warning">Bu müşteri henüz rezervasyon yapmamış.</div>
+            }
+        </div>
+    </div>
+
+    <a asp-action="Index" class="btn btn-secondary mt-3">Geri Dön</a>
+</div>
