@@ -95,9 +95,14 @@ public class HomeController(ILogger<HomeController> logger, DataContext context)
         {
             Id = f.Id,
             Title = f.FlightNumber,
-            Description = $"Kalkış: {f.Origin}, Varış: {f.Destination}, Tarih: {f.DepartureTime:yyyy-MM-dd}",
+            Origin = f.Origin,
+            Destination = f.Destination,
+            DepartureTime = f.DepartureTime,
+            ArrivalTime = f.ArrivalTime,
             ExtraInfo = $"{f.Tickets.Count(t => t.CustomerId == null)} boş koltuk var.",
-            Link = Url.Action("Index", "Ticket", new { flightId = f.Id })
+            Link = Url.Action("Index", "Ticket", new { flightId = f.Id }),
+            Airline = f.Airline, // Firma adı
+            AirlineLogoPath = f.AirlineLogoPath // Firma logosu yolu
         }).ToListAsync();
 
         return View(results);

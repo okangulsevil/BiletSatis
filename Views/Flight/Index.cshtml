@@ -1,38 +1,51 @@
 @{
     ViewData["Title"] = "Uçuşlar";
 }
-
 @model IEnumerable<Flight>
 
-<h2>Uçuş Listesi</h2>
-<a href="/Flight/Create" class="btn btn-primary">Uçuş Ekle</a>
-<hr>
+<div class="row  mb-3">
+    <div class="d-flex align-items-center justify-start gap-3">
+        <h5 class="mb-0">Uçuş Listesi
+        </h5>
+        <a asp-controller="Flight" asp-action="Create" class="btn btn-sm btn-warning">Uçuş
+            Ekle</a>
+    </div>
+</div>
+
 <table class="table">
     <thead>
         <tr>
-            <th>No</th>
+            <th>Logo</th>
             <th>Uçuş Numarası</th>
-            <th>Kalkış Yeri</th>
-            <th>Varış Yeri</th>
-            <th>Yolcu Kapasitesi</th>
-            <th style="width: 150px;">Ayarlar</th>
+            <th>Firma</th>
+            <th>Kalkış</th>
+            <th>Varış</th>
+            <th>Fiyat</th>
+            <th>İşlemler</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var flight in Model)
         {
             <tr>
-                <td>@Html.DisplayFor(modelItem => item.Id)</td>
-                <td>@Html.DisplayFor(modelItem => item.FlightNumber)</td>
-                <td>@Html.DisplayFor(modelItem => item.Origin)</td>
-                <td>@Html.DisplayFor(modelItem => item.Destination)</td>
-                <td>@Html.DisplayFor(modelItem => item.Capacity)</td>
                 <td>
-                    <a asp-controller="Flight" asp-action="Edit" asp-route-id="@item.Id"
-                        class="btn btn-sm btn-warning">Details</a>
-                    <a asp-controller="Flight" asp-action="Delete" asp-route-id="@item.Id"
-                        class="btn btn-sm btn-danger">Delete</a>
-
+                    @if (!string.IsNullOrEmpty(flight.AirlineLogoPath))
+                    {
+                        <img src="@flight.AirlineLogoPath" alt="@flight.Airline Logo" width="50" />
+                    }
+                    else
+                    {
+                        <span>Logo Yok</span>
+                    }
+                </td>
+                <td>@flight.FlightNumber</td>
+                <td>@flight.Airline</td>
+                <td>@flight.Origin</td>
+                <td>@flight.Destination</td>
+                <td>@flight.Price.ToString("C")</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@flight.Id" class="btn btn-warning btn-sm">Düzenle</a>
+                    <a asp-action="Delete" asp-route-id="@flight.Id" class="btn btn-danger btn-sm">Sil</a>
                 </td>
             </tr>
         }

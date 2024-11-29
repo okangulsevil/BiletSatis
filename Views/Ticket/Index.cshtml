@@ -37,3 +37,44 @@
         <button type="submit" class="btn btn-primary">Rezervasyonu Tamamla</button>
     </form>
 </div>
+@* 
+@model IEnumerable<Ticket>
+
+<div class="container my-5">
+    <h2 class="text-center">Alınan Biletler</h2>
+
+    @if (Model.Any())
+    {
+        <table class="table table-striped mt-4">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Müşteri</th>
+                    <th>Uçuş Numarası</th>
+                    <th>Kalkış</th>
+                    <th>Varış</th>
+                    <th>Koltuk Numarası</th>
+                    <th>Rezervasyon Tarihi</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var ticket in Model)
+                {
+                    <tr>
+                        <td>@ticket.Id</td>
+                        <td>@ticket.Customer?.FullName</td>
+                        <td>@ticket.Flight?.FlightNumber</td>
+                        <td>@ticket.Flight?.Origin</td>
+                        <td>@ticket.Flight?.Destination</td>
+                        <td>@ticket.SeatNumber</td>
+                        <td>@ticket.BookingDate.ToString("yyyy-MM-dd")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <div class="alert alert-warning text-center">Alınan bilet bulunamadı.</div>
+    }
+</div> *@

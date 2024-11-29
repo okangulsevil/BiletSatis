@@ -12,6 +12,9 @@ namespace BiletSatis.Models
         public string FlightNumber { get; set; } = string.Empty;
 
         [Required]
+        public string Airline { get; set; } = string.Empty;
+
+        [Required]
         public string Origin { get; set; } = string.Empty;
 
         [Required]
@@ -26,11 +29,16 @@ namespace BiletSatis.Models
         public DateTime ArrivalTime { get; set; }
 
         [Required]
+        public TimeSpan FlightDuration => ArrivalTime - DepartureTime; // Uçuş Süresi
+
+        [Required]
         public int Capacity { get; set; }
 
         [Required]
         [Column(TypeName = "decimal(18,2)")]
         public decimal Price { get; set; }
+
+        public string? AirlineLogoPath { get; set; } // Firma logosunun dosya yolu
 
         public ICollection<Ticket> Tickets { get; set; } = new List<Ticket>();
     }

@@ -13,6 +13,34 @@
       "PackagePath": "staticwebassets/favicon.ico"
     },
     {
+      "Id": "/Users/okangulsevil/C#/BiletSatis/wwwroot/images/35dad464-d6f0-4749-b00a-32a40f203981_ajet.jpeg",
+      "PackagePath": "staticwebassets/images/35dad464-d6f0-4749-b00a-32a40f203981_ajet.jpeg"
+    },
+    {
+      "Id": "/Users/okangulsevil/C#/BiletSatis/wwwroot/images/4bc13990-1a79-461e-ab7c-aee9f9f4ef90_thy.png",
+      "PackagePath": "staticwebassets/images/4bc13990-1a79-461e-ab7c-aee9f9f4ef90_thy.png"
+    },
+    {
+      "Id": "/Users/okangulsevil/C#/BiletSatis/wwwroot/images/52e7b8dc-ab80-42fb-ab50-baca6e2e9640_ajet.jpeg",
+      "PackagePath": "staticwebassets/images/52e7b8dc-ab80-42fb-ab50-baca6e2e9640_ajet.jpeg"
+    },
+    {
+      "Id": "/Users/okangulsevil/C#/BiletSatis/wwwroot/images/9765c6e7-257a-4772-a4c3-0eb9ae918bec_thy.png",
+      "PackagePath": "staticwebassets/images/9765c6e7-257a-4772-a4c3-0eb9ae918bec_thy.png"
+    },
+    {
+      "Id": "/Users/okangulsevil/C#/BiletSatis/wwwroot/images/be5d45cf-8853-4650-89fd-6e209588c665_pegasus.png",
+      "PackagePath": "staticwebassets/images/be5d45cf-8853-4650-89fd-6e209588c665_pegasus.png"
+    },
+    {
+      "Id": "/Users/okangulsevil/C#/BiletSatis/wwwroot/images/e65156b2-9cce-480d-82a7-b2eecfe308fa_ajet.jpeg",
+      "PackagePath": "staticwebassets/images/e65156b2-9cce-480d-82a7-b2eecfe308fa_ajet.jpeg"
+    },
+    {
+      "Id": "/Users/okangulsevil/C#/BiletSatis/wwwroot/images/eb78e12b-8968-4948-8d19-d0e35bd235f2_ajet.jpeg",
+      "PackagePath": "staticwebassets/images/eb78e12b-8968-4948-8d19-d0e35bd235f2_ajet.jpeg"
+    },
+    {
       "Id": "/Users/okangulsevil/C#/BiletSatis/wwwroot/js/site.js",
       "PackagePath": "staticwebassets/js/site.js"
     },

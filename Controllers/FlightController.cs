@@ -20,10 +20,26 @@ namespace BiletSatis.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Flight flight)
+        public async Task<IActionResult> Create(Flight flight, IFormFile? Logo)
         {
             if (ModelState.IsValid)
             {
+                // Logo kaydetme işlemi
+                if (Logo != null)
+                {
+                    var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images");
+                    Directory.CreateDirectory(uploadsFolder);
+                    var uniqueFileName = Guid.NewGuid().ToString() + "_" + Logo.FileName;
+                    var filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+                    using (var fileStream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await Logo.CopyToAsync(fileStream);
+                    }
+
+                    flight.AirlineLogoPath = "/images/" + uniqueFileName;
+                }
+
                 _context.Flights.Add(flight);
                 await _context.SaveChangesAsync();
 

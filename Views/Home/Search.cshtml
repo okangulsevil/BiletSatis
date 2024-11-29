@@ -1,27 +1,47 @@
 @model IEnumerable<SearchResult>
 
 <div class="container my-5">
-    <h2 class="text-center">Arama Sonuçları</h2>
+    <h2 class="text-center">Uçuş Arama Sonuçları</h2>
 
     @if (Model.Any())
     {
         <table class="table table-striped mt-4">
             <thead>
                 <tr>
-                    <th>#</th>
+                    <th>Logo</th>
+                    <th>Firma</th>
                     <th>Uçuş Numarası</th>
-                    <th>Açıklama</th>
+                    <th>Kalkış</th>
+                    <th>Kalkış Tarihi</th>
+                    <th>Varış</th>
+                    <th>Varış Tarihi</th>
+                    <th>Uçuş Süresi</th>
                     <th>Boş Koltuk</th>
-                    <th>İşlem</th>
+                    <th>İşlemler</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var result in Model)
                 {
                     <tr>
-                        <td>@result.Id</td>
+                        <td>
+                            @if (!string.IsNullOrEmpty(result.AirlineLogoPath))
+                            {
+                                <img src="@result.AirlineLogoPath" alt="@result.Airline Logo" width="50" />
+                            }
+                            else
+                            {
+                                <span>Logo Yok</span>
+                            }
+                        </td>
+                        <td>@result.Airline</td>
                         <td>@result.Title</td>
-                        <td>@result.Description</td>
+                        <td>@result.Origin</td>
+                        <td>@result.ArrivalTime</td>
+                        <td>@result.Destination</td>
+                        <td>@result.DepartureTime</td>
+                        <td>@result.FlightDuration</td>
+
                         <td>@result.ExtraInfo</td>
                         <td>
                             <a href="@result.Link" class="btn btn-primary btn-sm">Rezervasyon Yap</a>

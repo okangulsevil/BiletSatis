@@ -2,28 +2,42 @@
 
 <h2>Uçuş Ekle</h2>
 <hr>
-<form asp-controller="Flight" asp-action="Create" method="post">
+<form asp-controller="Flight" asp-action="Create" method="post" enctype="multipart/form-data">
     <div class="mb-3">
-        <label asp-for="FlightNumber" class="form-label"></label>
+        <label asp-for="FlightNumber" class="form-label">Uçuş Numarası</label>
         <input asp-for="FlightNumber" class="form-control">
     </div>
     <div class="mb-3">
-        <label asp-for="Origin" class="form-label"></label>
+        <label asp-for="Airline" class="form-label">Uçak Firması</label>
+        <input asp-for="Airline" class="form-control">
+    </div>
+    <div class="mb-3">
+        <label asp-for="Origin" class="form-label">Kalkış Yeri</label>
         <input asp-for="Origin" class="form-control">
     </div>
     <div class="mb-3">
-        <label asp-for="Destination" class="form-label"></label>
+        <label asp-for="Destination" class="form-label">Varış Yeri</label>
         <input asp-for="Destination" class="form-control">
     </div>
     <div class="mb-3">
-        <label asp-for="Capacity" class="form-label"></label>
-        <input asp-for="Capacity" class="form-control">
+        <label asp-for="DepartureTime" class="form-label">Kalkış Zamanı</label>
+        <input asp-for="DepartureTime" class="form-control" type="datetime-local">
     </div>
-
-     <div class="mb-3">
-        <label asp-for="Price" class="form-label"></label>
-        <input asp-for="Price" class="form-control">
+    <div class="mb-3">
+        <label asp-for="ArrivalTime" class="form-label">Varış Zamanı</label>
+        <input asp-for="ArrivalTime" class="form-control" type="datetime-local">
     </div>
-
+    <div class="mb-3">
+        <label asp-for="Capacity" class="form-label">Kapasite</label>
+        <input asp-for="Capacity" class="form-control" type="number" min="1">
+    </div>
+    <div class="mb-3">
+        <label asp-for="Price" class="form-label">Bilet Ücreti</label>
+        <input asp-for="Price" class="form-control" type="number" step="0.01">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Firma Logosu</label>
+        <input type="file" name="Logo" class="form-control">
+    </div>
     <button type="submit" class="btn btn-primary">Kaydet</button>
 </form>

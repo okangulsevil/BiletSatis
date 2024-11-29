@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BiletSatis")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d75f774a7f4d3d5fa7974f72fc468241885b77e7")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f5f8909c5b7c5e1200a38a9c6e9d1f5fc261fb1f")]
 [assembly: System.Reflection.AssemblyProductAttribute("BiletSatis")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BiletSatis")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

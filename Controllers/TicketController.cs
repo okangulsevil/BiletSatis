@@ -60,6 +60,17 @@ namespace BiletSatis.Controllers
 
             return View(tickets);
         }
+        // [HttpGet]
+        // public async Task<IActionResult> Index(int? flightId)
+        // {
+        //     var tickets = await _context.Tickets
+        //          .Include(t => t.Customer) // Müşteri bilgilerini dahil et
+        //          .Include(t => t.Flight)  // Uçuş bilgilerini dahil et
+        //          .Where(t => t.CustomerId != null) // Müşteriye atanmış biletler
+        //          .ToListAsync();
+
+        //     return View(tickets);
+        // }
 
         public IActionResult Create()
         {
