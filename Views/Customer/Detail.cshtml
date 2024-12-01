@@ -51,7 +51,7 @@
                                 <td>@ticket.Flight.Origin</td>
                                 <td>@ticket.Flight.Destination</td>
                                 <td>@ticket.SeatNumber</td>
-                                <td>@ticket.BookingDate.ToString("yyyy-MM-dd")</td>
+                                <td>@ticket.BookingDate?.ToString("yyyy-MM-dd") ?? "N/A"</td>
                             </tr>
                         }
                     </tbody>

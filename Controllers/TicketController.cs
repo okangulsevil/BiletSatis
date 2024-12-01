@@ -60,6 +60,7 @@ namespace BiletSatis.Controllers
 
             return View(tickets);
         }
+
         // [HttpGet]
         // public async Task<IActionResult> Index(int? flightId)
         // {
@@ -169,9 +170,14 @@ namespace BiletSatis.Controllers
             {
                 return NotFound();
             }
-            _context.Tickets.Remove(ticket);
+
+            // Bileti boşa çıkar
+            ticket.CustomerId = null;
+            ticket.BookingDate = null;
+
+            _context.Tickets.Update(ticket);
             await _context.SaveChangesAsync();
-            return RedirectToAction("Index");
+            return RedirectToAction("ReservedTickets");
         }
 
         [HttpPost]
@@ -189,6 +195,8 @@ namespace BiletSatis.Controllers
                     if (ticket != null && ticket.CustomerId == null)
                     {
                         ticket.CustomerId = customerId;
+                        ticket.BookingDate = DateTime.Now; // Rezervasyon tarihi olarak bugünün tarihi atanıyor
+
                         _context.Update(ticket);
                     }
                 }
@@ -198,5 +206,19 @@ namespace BiletSatis.Controllers
 
             return RedirectToAction("Index", "Home"); // Ana sayfaya yönlendirme
         }
+
+        [HttpGet]
+        public async Task<IActionResult> ReservedTickets()
+        {
+            // Rezervasyon yapılmış biletleri getir
+            var reservedTickets = await _context.Tickets
+                .Include(t => t.Customer) // Müşteri bilgilerini dahil et
+                .Include(t => t.Flight)  // Uçuş bilgilerini dahil et
+                .Where(t => t.CustomerId != null) // Sadece müşteri atanmış biletler
+                .ToListAsync();
+
+            return View(reservedTickets);
+        }
+
     }
 }

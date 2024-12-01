@@ -36,7 +36,7 @@
     <div class="mb-3">
         <label asp-for="BookingDate" class="form-label">Rezervasyon Tarihi:</label>
         <input asp-for="BookingDate" class="form-control" type="date"
-            value="@Model.BookingDate.ToString("yyyy-MM-dd")" />
+            value="@Model.BookingDate?.ToString("yyyy-MM-dd")" />
         <span asp-validation-for="BookingDate" class="text-danger"></span>
     </div>
 

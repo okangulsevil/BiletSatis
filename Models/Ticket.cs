@@ -24,9 +24,8 @@ namespace BiletSatis.Models
         [Range(0.01, double.MaxValue)]
         public decimal TotalPrice { get; set; }
 
-        [Required]
         [DataType(DataType.Date)]
-        public DateTime BookingDate { get; set; }
+        public DateTime? BookingDate { get; set; }
 
         public bool IsBooked { get; set; } = false; // Varsayılan değer eklendi
     }

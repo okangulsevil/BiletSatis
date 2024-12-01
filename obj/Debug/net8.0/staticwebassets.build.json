@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "POV7Btwr377XyFWwIxXyKJpPHme0k6zE2Rq8tojDeJU=",
+  "Hash": "ofhUhRjoyFVsNK3Tp4tobZTUlgMtXiezFKfXlNJqQE0=",
   "Source": "BiletSatis",
   "BasePath": "_content/BiletSatis",
   "Mode": "Default",
@@ -186,6 +186,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/images/be5d45cf-8853-4650-89fd-6e209588c665_pegasus.png"
+    },
+    {
+      "Identity": "/Users/okangulsevil/C#/BiletSatis/wwwroot/images/d7219d34-3f87-447f-b161-c17744024f41_thy.png",
+      "SourceId": "BiletSatis",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/okangulsevil/C#/BiletSatis/wwwroot/",
+      "BasePath": "_content/BiletSatis",
+      "RelativePath": "images/d7219d34-3f87-447f-b161-c17744024f41_thy.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/images/d7219d34-3f87-447f-b161-c17744024f41_thy.png"
     },
     {
       "Identity": "/Users/okangulsevil/C#/BiletSatis/wwwroot/images/e65156b2-9cce-480d-82a7-b2eecfe308fa_ajet.jpeg",
